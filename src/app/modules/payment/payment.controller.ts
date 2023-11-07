@@ -4,11 +4,11 @@ import sendResponse from '../../../shared/response';
 import httpStatus from 'http-status';
 
 const insertIntoDB = async (req: Request, res: Response) => {
-  const result = await PaymentService.initPayment();
+  const result = await PaymentService.initPayment(req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Student created successfully',
+    message: 'Payment Init successfully',
     data: result
   });
 };
