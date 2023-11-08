@@ -15,7 +15,8 @@ const envVarsZodSchema = z.object({
   JWT_SECRET: z.string(),
   STORE_ID: z.string(),
   STORE_PASSWORD: z.string(),
-  PAYMENT_URL: z.string()
+  PAYMENT_URL: z.string(),
+  Validation_URL: z.string()
 });
 
 const envVars = envVarsZodSchema.parse(process.env);
@@ -35,6 +36,7 @@ export default {
   ssl: {
     store_id: envVars.STORE_ID,
     store_Password: envVars.STORE_PASSWORD,
-    payment_Url: envVars.PAYMENT_URL
+    payment_Url: envVars.PAYMENT_URL,
+    Validation_Url: envVars.Validation_URL
   }
 };
