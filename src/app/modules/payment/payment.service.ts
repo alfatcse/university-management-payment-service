@@ -6,7 +6,6 @@ import { PaginationHelper } from '../../../helpers/paginationHelper';
 import { paymentSearchableFields } from './payment.constants';
 
 const initPayment = async (data: any) => {
-  console.log('payment');
   const paymentSession = await sslService.initPayment({
     total_amount: data.amount,
     tran_id: data.transactionId,
@@ -22,6 +21,7 @@ const initPayment = async (data: any) => {
       studentId: data.studentId
     }
   });
+
   return paymentSession;
 };
 const webhook = async (payload: any) => {

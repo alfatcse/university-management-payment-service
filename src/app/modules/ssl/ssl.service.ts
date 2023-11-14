@@ -4,7 +4,6 @@ import ApiError from '../../../errors/apiError';
 import httpStatus from 'http-status';
 
 const initPayment = async (payload: any) => {
-  console.log(payload);
   try {
     const data = {
       store_id: config.ssl.store_id,
@@ -12,9 +11,9 @@ const initPayment = async (payload: any) => {
       total_amount: payload.total_amount,
       currency: 'BDT',
       tran_id: payload.tran_id, // use unique tran_id for each api call
-      success_url: 'http://localhost:3030/success',
-      fail_url: 'http://localhost:3030/fail',
-      cancel_url: 'http://localhost:3030/cancel',
+      success_url: 'http://localhost:3000/payments?status=success',
+      fail_url: 'http://localhost:3030/payments?status=error',
+      cancel_url: 'http://localhost:3030/payments?status=warning',
       ipn_url: 'http://localhost:3030/ipn',
       shipping_method: 'N/A',
       product_name: 'Semester Payment.',
@@ -43,7 +42,7 @@ const initPayment = async (payload: any) => {
       data: data,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
-    console.log(response);
+
     return response.data.redirectGatewayURL;
   } catch (error) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Payment Error');
@@ -55,7 +54,7 @@ const validate = async (data: any) => {
       method: 'GET',
       url: `${config.ssl.Validation_Url}?val_id=${data.val_id}&store_id=${config.ssl.store_id}&store_passwd=${config.ssl.store_Password}&format=json`
     });
-    console.log('Validation:', response);
+
     return response.data;
   } catch (error) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Payment Error');
