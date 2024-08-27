@@ -12,6 +12,7 @@ const envVarsZodSchema = z.object({
     .refine((val) => Number(val)),
   DATABASE_URL: z.string(),
   REDIS_URL: z.string(),
+  REDIS_PASS: z.string(),
   JWT_SECRET: z.string(),
   STORE_ID: z.string(),
   STORE_PASSWORD: z.string(),
@@ -28,10 +29,11 @@ export default {
     url: envVars.DATABASE_URL
   },
   redis: {
-    url: envVars.REDIS_URL
+    url: envVars.REDIS_URL,
+    pass:envVars.REDIS_PASS
   },
   jwt: {
-    secret: envVars.JWT_SECRET
+    secret: envVars.JWT_SECRET,
   },
   ssl: {
     store_id: envVars.STORE_ID,
